@@ -5,9 +5,9 @@ from fastapi import Depends, FastAPI, HTTPException, Request
 from nacl.exceptions import BadSignatureError
 from nacl.signing import VerifyKey
 
-import config
-import discordclient
-import models
+from . import config
+from . import discordclient
+from . import models
 
 app = FastAPI()
 discord = discordclient.DiscordClient()
@@ -41,7 +41,8 @@ async def command_entrypoint(interaction: models.Interaction):
 async def on_startup():
     await discord.get_client_credentials_token()
     await discord.register_global_commands()
-    await discord.register_guild_commands("269275778867396608")
+    if config.TEST_GUILD_ID:
+        await discord.register_guild_commands(config.TEST_GUILD_ID)
 
 
 @app.on_event("shutdown")

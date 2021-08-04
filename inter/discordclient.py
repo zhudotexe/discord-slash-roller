@@ -1,6 +1,6 @@
 import httpx
 
-import config
+from . import config
 
 API_BASE = "https://discord.com/api/v8"
 COMMANDS_PAYLOAD = [
@@ -18,7 +18,7 @@ COMMANDS_PAYLOAD = [
     },
     {
         "name": "eroll",
-        "description": "Roll some dice, ephemerally!",
+        "description": "Roll some dice ephemerally (only you can see it)!",
         "options": [
             {
                 "type": 3,  # string
