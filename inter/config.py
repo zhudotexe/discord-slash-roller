@@ -1,0 +1,8 @@
+"""
+API keys and other configuration constants defined here.
+"""
+import os
+
+DISCORD_APPLICATION_ID = os.getenv("DISCORD_APPLICATION_ID")
+DISCORD_APPLICATION_PUBLIC_KEY = os.getenv("DISCORD_APPLICATION_PUBLIC_KEY")
+DISCORD_APPLICATION_SECRET = os.getenv("DISCORD_APPLICATION_SECRET")
