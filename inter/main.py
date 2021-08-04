@@ -2,6 +2,7 @@ import logging
 
 import d20
 from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi.responses import RedirectResponse
 from nacl.exceptions import BadSignatureError
 from nacl.signing import VerifyKey
 
@@ -35,6 +36,12 @@ async def command_entrypoint(interaction: models.Interaction):
         return models.InteractionResponse(type=models.InteractionType.PING)
     elif interaction.type == models.InteractionType.APPLICATION_COMMAND:
         return await handle_command(interaction)
+
+
+@app.get("/")
+async def redirect_invite():
+    """GET / - redirect to the Discord oauth page for now"""
+    return RedirectResponse(f"https://discord.com/api/oauth2/authorize?client_id={config.DISCORD_APPLICATION_ID}&scope=applications.commands")
 
 
 @app.on_event("startup")
